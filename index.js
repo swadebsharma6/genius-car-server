@@ -27,11 +27,18 @@ async function run() {
     await client.connect();
 
     const serviceCollection = client.db('GeniusCarDB').collection('services');
+    const productCollection = client.db('GeniusCarDB').collection('products');
 
     app.get('/services', async(req, res)=>{
         const cursor = serviceCollection.find();
         const result = await cursor.toArray();
         res.send(result);
+    });
+
+    app.get('/products', async(req, res)=>{
+      const cursor = productCollection.find();
+      const result = await cursor.toArray();
+      res.send(result)
     })
    
     await client.db("admin").command({ ping: 1 });
