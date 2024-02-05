@@ -30,7 +30,14 @@ async function run() {
     const productCollection = client.db('GeniusCarDB').collection('products');
     const orderCollection = client.db('GeniusCarDB').collection('orders');
     const teamCollection = client.db('GeniusCarDB').collection('team');
+    const featureCollection = client.db('GeniusCarDB').collection('features');
+    const testCollection = client.db('GeniusCarDB').collection('testimonial');
 
+    app.get('/test', async(req, res)=>{
+        const cursor = testCollection.find();
+        const result = await cursor.toArray();
+        res.send(result);
+    });
     app.get('/services', async(req, res)=>{
         const cursor = serviceCollection.find();
         const result = await cursor.toArray();
@@ -39,6 +46,12 @@ async function run() {
 
     app.get('/team', async(req, res)=>{
       const cursor = teamCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    app.get('/feature', async(req, res)=>{
+      const cursor = featureCollection.find();
       const result = await cursor.toArray();
       res.send(result);
     })
